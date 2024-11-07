@@ -7,6 +7,7 @@ import {
   GizmoViewport,
   Grid,
   CameraControls,
+  useGLTF,
 } from '@react-three/drei';
 import {Color} from 'three';
 import {useControls} from 'leva';
@@ -25,9 +26,9 @@ function CranePointCloud() {
 
   const {camera} = useThree();
 
-  useFrame(() =>
-    console.log(camera.position, camera.rotation, camera.far, camera.applyQuaternion)
-  );
+  const {nodes, materials} = useGLTF('/crane.gltf');
+
+  console.log(nodes, materials);
 
   //const rng = useMemo(() => prand.xoroshiro128plus(ctrl.randSeed), [ctrl.randSeed]);
 
@@ -57,11 +58,14 @@ function CranePointCloud() {
       </mesh>
 
       {points.map((point, index) => (
-        <mesh key={index} position={point.position}>
-          <sphereGeometry args={[ctrl.craneSize / 2, 32, 32]} />
-          {/* Small sphere for each crane point */}
-          <meshStandardMaterial color={point.color} />
-        </mesh>
+        <mesh
+          key={index}
+          position={point.position}
+          scale={4}
+          rotation={[-1.5, 0, 0]}
+          geometry={nodes['Object_3'].geometry}
+          material={materials['PapelOrigami']}
+        ></mesh>
       ))}
     </group>
   );
