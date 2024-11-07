@@ -1,5 +1,5 @@
 import {Canvas, useFrame, useThree} from '@react-three/fiber';
-import {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
+import {useLayoutEffect, useRef, useState} from 'react';
 import './App.css';
 import {
   Environment,
@@ -10,7 +10,7 @@ import {
 } from '@react-three/drei';
 import {Color} from 'three';
 import {useControls} from 'leva';
-import prand from 'pure-rand';
+//import prand from 'pure-rand';
 
 function CranePointCloud() {
   const [seed] = useState(() => Math.round(Math.random() * 100));
@@ -29,17 +29,17 @@ function CranePointCloud() {
     console.log(camera.position, camera.rotation, camera.far, camera.applyQuaternion)
   );
 
-  const rng = useMemo(() => prand.xoroshiro128plus(ctrl.randSeed), [ctrl.randSeed]);
+  //const rng = useMemo(() => prand.xoroshiro128plus(ctrl.randSeed), [ctrl.randSeed]);
 
-  const getRand = useCallback(
-    () => prand.unsafeUniformIntDistribution(0, 1000, rng) / 1000,
-    [rng]
-  );
-
-  // Parameters for dispersal in 3D space
-  const heightIncrement = 0.2; // Y-axis increment
-  const depthIncrement = 1; // Z-axis increment
-  const spread = 30; // X-axis random spread
+  //const getRand = useCallback(
+  //  () => prand.unsafeUniformIntDistribution(0, 1000, rng) / 1000,
+  //  [rng]
+  //);
+  //
+  //// Parameters for dispersal in 3D space
+  //const heightIncrement = 0.2; // Y-axis increment
+  //const depthIncrement = 1; // Z-axis increment
+  //const spread = 30; // X-axis random spread
 
   // Generate crane points in a specific pattern
   const points = Array.from({length: ctrl.totalCranes}, (_, i) => {
